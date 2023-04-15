@@ -135,8 +135,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -156,6 +156,12 @@
                         <_dsannotations-options>inherit</_dsannotations-options>
                         <!-- Enable processing of OSGI metatype annotations -->
                         <_metatypeannotations>*</_metatypeannotations>
+                        <Import-Package>
+                            liquibase.parser.core.json,
+                            liquibase.parser.core.yaml,
+                            liquibase.change.core,
+                            *
+                        </Import-Package>
                         <Include-Resource>
                             /=target/classes/,
                             /www.liquibase.org/=target/dependency/www.liquibase.org/
