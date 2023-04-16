@@ -17,6 +17,7 @@
         <mockrunner.version>2.0.6</mockrunner.version>
         <pax.jdbc.version>1.5.1</pax.jdbc.version>
         <derby.version>10.14.2.0</derby.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
