@@ -10,7 +10,6 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
 import liquibase.Liquibase;
-import liquibase.database.DatabaseConnection;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
@@ -25,7 +24,7 @@ public class SampleLiquibase implements PreHook {
 
     @Override
     public void prepare(DataSource datasource) throws SQLException {
-        try(Connection connection = datasource.getConnection()) {
+        try(var connection = datasource.getConnection()) {
             createSchema(connection);
         } catch (Exception e) {
             throw new SQLException("Failed to create liquibase schema for liquibase-sample", e);
@@ -37,13 +36,13 @@ public class SampleLiquibase implements PreHook {
     }
 
     private void applyLiquibaseChangeLog(Connection connection, String changelogClasspathResource) throws LiquibaseException {
-        Liquibase liquibase = createLiquibaseInstance(connection, changelogClasspathResource);
+        var liquibase = createLiquibaseInstance(connection, changelogClasspathResource);
         liquibase.update("");
     }
 
     private Liquibase createLiquibaseInstance(Connection connection, String changelogClasspathResource) throws LiquibaseException {
-        DatabaseConnection databaseConnection = new JdbcConnection(connection);
-        ClassLoaderResourceAccessor classLoaderResourceAccessor = new ClassLoaderResourceAccessor(getClass().getClassLoader());
+        var databaseConnection = new JdbcConnection(connection);
+        var classLoaderResourceAccessor = new ClassLoaderResourceAccessor(getClass().getClassLoader());
         return new Liquibase(changelogClasspathResource, classLoaderResourceAccessor, databaseConnection);
     }
 
