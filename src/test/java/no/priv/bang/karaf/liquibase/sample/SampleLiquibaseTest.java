@@ -3,8 +3,6 @@ package no.priv.bang.karaf.liquibase.sample;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -18,12 +16,12 @@ class SampleLiquibaseTest {
 
     @Test
     void testCreateSchema() throws Exception {
-        DataSource datasource = createDataSource("liquibasesample");
-        SampleLiquibase liquibase = new SampleLiquibase();
+        var datasource = createDataSource("liquibasesample");
+        var liquibase = new SampleLiquibase();
         liquibase.activate();
 
         liquibase.prepare(datasource);
-        try(Connection connection = datasource.getConnection()) {
+        try(var connection = datasource.getConnection()) {
             addAlbumEntries(connection);
             assertAlbumEntries(connection);
         }
@@ -35,10 +33,10 @@ class SampleLiquibaseTest {
     }
 
     private void assertAlbumEntry(Connection connection, int id, int parent, String path, boolean album, String title, String description, String imageUrl, String thumbnailUrl) throws Exception {
-        String sql = "select * from albumentries where albumentry_id = ?";
-        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+        var sql = "select * from albumentries where albumentry_id = ?";
+        try(var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
-            try(ResultSet result = statement.executeQuery()) {
+            try(var result = statement.executeQuery()) {
                 if (result.next()) {
                     assertEquals(parent, result.getInt(2));
                     assertEquals(path, result.getString(3));
@@ -60,8 +58,8 @@ class SampleLiquibaseTest {
     }
 
     private void addAlbumEntry(Connection connection, int parent, String path, boolean album, String title, String description, String imageUrl, String thumbnailUrl) throws Exception {
-        String sql = "insert into albumentries (parent, localpath, album, title, description, imageurl, thumbnailurl) values (?, ?, ?, ?, ?, ?, ?)";
-        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+        var sql = "insert into albumentries (parent, localpath, album, title, description, imageurl, thumbnailurl) values (?, ?, ?, ?, ?, ?, ?)";
+        try(var statement = connection.prepareStatement(sql)) {
             statement.setInt(1, parent);
             statement.setString(2, path);
             statement.setBoolean(3, album);
@@ -74,7 +72,7 @@ class SampleLiquibaseTest {
     }
 
     private DataSource createDataSource(String dbname) throws Exception {
-        Properties properties = new Properties();
+        var properties = new Properties();
         properties.setProperty(DataSourceFactory.JDBC_URL, "jdbc:derby:memory:" + dbname + ";create=true");
         return derbyDataSourceFactory.createDataSource(properties);
     }
