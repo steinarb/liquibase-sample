@@ -46,7 +46,7 @@ class SampleLiquibaseTest {
                     assertEquals(imageUrl, result.getString(7));
                     assertEquals(thumbnailUrl, result.getString(8));
                 } else {
-                    fail(String.format("Didn't find albumentry with id=d", id));
+                    fail(String.format("Didn't find albumentry with id=%d", id));
                 }
             }
         }
