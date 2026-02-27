@@ -12,7 +12,7 @@
         <liquibase.version>5.0.1</liquibase.version>
         <karaf-feature-name>liquibase-sample-hook</karaf-feature-name>
         <karaf.version>4.4.10</karaf.version>
-        <maven.bundle.plugin.version>6.0.0</maven.bundle.plugin.version>
+        <maven.bundle.plugin.version>6.0.2</maven.bundle.plugin.version>
         <junit.jupiter.version>6.0.3</junit.jupiter.version>
         <assertj.version>3.27.7</assertj.version>
         <mockito.version>5.22.0</mockito.version>
