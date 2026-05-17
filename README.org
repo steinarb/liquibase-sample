@@ -1,4 +1,4 @@
-* Liqubase sample
+* Liquibase sample
 
 This project contains an OSGi bundle sample project using liquibase.
 
