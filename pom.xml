@@ -9,7 +9,7 @@
     <name>Sample bundle for liquibase</name>
 
     <properties>
-        <liquibase.version>5.0.2</liquibase.version>
+        <liquibase.version>5.0.3</liquibase.version>
         <karaf-feature-name>liquibase-sample-hook</karaf-feature-name>
         <karaf.version>4.4.11</karaf.version>
         <maven.bundle.plugin.version>6.0.2</maven.bundle.plugin.version>
